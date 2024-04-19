@@ -11,6 +11,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,21 +30,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var valor1 by remember { mutableStateOf("") }
-                    var valor2 by remember { mutableStateOf("") }
-                    var suma by remember { mutableStateOf("") }
+                    val modelo by remember {mutableStateOf(Calculadora())}
                     Column {
-                        TextField(value = valor1, onValueChange = {valor1=it })
-                        TextField(value = valor2, onValueChange = {valor2=it})
+                        TextField(value = modelo.valor1, onValueChange = {modelo.valor1=it })
+                        TextField(value = modelo.valor2, onValueChange = {modelo.valor2=it})
                         ElevatedButton(onClick = {
-                            suma=(valor1.toInt()+valor2.toInt()).toString()
-                            valor1=""
-                            valor2=""
-
+                            modelo.sumarValor1Valor2();
                         }) {
                             Text("Sumar valores")
                         }
-                        Text(suma)
+                        Text(modelo.suma)
+                        for (texto in modelo.listado) {
+                            Text(texto)
+                        }
                     }
                 }
             }
