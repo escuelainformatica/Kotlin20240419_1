@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val modelo by remember {mutableStateOf(Calculadora())}
+
                     Column {
                         TextField(value = modelo.valor1, onValueChange = {modelo.valor1=it })
                         TextField(value = modelo.valor2, onValueChange = {modelo.valor2=it})
